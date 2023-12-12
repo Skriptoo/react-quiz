@@ -17,5 +17,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <ChakraBaseProvider>
       <RouterProvider router={router}/>
     </ChakraBaseProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )
