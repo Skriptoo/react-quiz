@@ -1,14 +1,13 @@
 import { useEffect } from "react";
-import { io } from "socket.io-client";
-
-const socket = io("http://localhost:8000")
+import ConnectPage from "./pages/connectPage";
 const  App = () =>  {
+
   useEffect(()=> {
-    socket.emit("connect", {id: "Essa"});
   }, []);
+
   return (
     <>
-      
+      <ConnectPage/>
     </>
   )
 }
