@@ -1,14 +1,8 @@
-import { useEffect } from "react";
-import ConnectPage from "./pages/connectPage";
+import AppProviders from "./providers";
+
 const  App = () =>  {
-
-  useEffect(()=> {
-  }, []);
-
   return (
-    <>
-      <ConnectPage/>
-    </>
+    <AppProviders/>
   )
 }
 
