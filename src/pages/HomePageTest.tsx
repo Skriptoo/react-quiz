@@ -1,10 +1,7 @@
 import { Box, Button, FormControl, FormErrorMessage, Input, Text } from "@chakra-ui/react";
-import { useContext, useState } from "react";
-import {useForm} from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { io } from "socket.io-client";
-import { Socket } from "socket.io-client/debug";
-import { SocketContext } from "../providers/SocketProvider";
+
+
 
 const HomePageTest = () => {
   const navigate = useNavigate();

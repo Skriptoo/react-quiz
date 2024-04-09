@@ -1,25 +1,29 @@
 import { createContext, useEffect, useRef } from "react"
 import { io } from "socket.io-client"
 import TSocketContext from "../types/SocketContext";
+import { useParams } from "react-router-dom";
 
 
 type Props = {
-    userName: string,
-    roomCode: string
-    children: React.ReactNode
+    children: React.ReactNode,
 }
 
 export const SocketContext = createContext<TSocketContext | null>(null);
-const SocketProvider = ({roomCode,userName, children}: Props) => {
-    //const {roomCode} = useParams<{roomCode: string}>();
-    const socketRef = useRef(io(import.meta.env.VITE_BACKEND_URL));
+const SocketProvider = ({children}: Props) => {
+    const {roomCode} = useParams();
+    const socketRef = useRef(io(import.meta.env.VITE_BACKEND_URL, {autoConnect: false}));
     const socket = socketRef.current;
 
     useEffect(() => {
-        socket.emit("joinRoom", roomCode, userName);
+        console.log("xd")
+        if(!socket.connected) socket.connect();
+        socket.emit('joinRoom', roomCode);
+        return () => {
+            socket.disconnect();
+        }
     }, []);
     return (
-        <SocketContext.Provider value={{roomcode: roomCode, username: userName}}>
+        <SocketContext.Provider value={{roomcode: roomCode ?? ''}}>
             {children}
         </SocketContext.Provider>
     )
