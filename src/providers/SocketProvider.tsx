@@ -15,11 +15,12 @@ const SocketProvider = ({children}: Props) => {
     const socket = socketRef.current;
 
     useEffect(() => {
-        console.log("xd")
+        console.log(socket)
         if(!socket.connected) socket.connect();
         socket.emit('joinRoom', roomCode);
         return () => {
             socket.disconnect();
+            socket.off('joinRoom');
         }
     }, []);
     return (
