@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 type FormValues = {
   roomCode: string;
+  username: string;
 }
 
 const HomePage = () => {
   const [joinForm, setJoinForm] = useState<boolean>(false);
-  const [roomCode, setRoomCode] = useState<string>("");
   const navigate = useNavigate();
   
   const {
@@ -20,7 +20,9 @@ const HomePage = () => {
 
 
   const joinRoom = (formValues: FormValues) => {
-    navigate(`/room/${formValues.roomCode}`)
+    navigate(`/room/${formValues.roomCode}`, {
+      state: {username: formValues.username}
+    });
   };
 
   const createRoom = () => {
@@ -33,16 +35,26 @@ const HomePage = () => {
       {!joinForm ? 
       <> 
       <Button onClick={() => setJoinForm(!joinForm)}>Join room</Button> 
-      </>
-       : 
+      </> : 
       <>  
        <form onSubmit={handleSubmit(joinRoom)}>
-         <FormControl id="roomCode">
+          <FormControl id="username">
+            <Input 
+              type="text" 
+              placeholder="Enter username" 
+              {...register("username", {})}
+            />
+            {errors.username && <FormErrorMessage>{errors.username.message}</FormErrorMessage>}
+          </FormControl>
+          <FormControl id="roomCode">
            <Input 
              type="text" 
              placeholder="Enter room code" 
              {...register("roomCode", {
-               required: "Room code is required"
+               required: "Room code is required",
+               maxLength: {
+                value: 5, 
+                message: "Room code must be 5 characters long"},
              })}
              />
              {errors.roomCode && <FormErrorMessage>{errors.roomCode.message}</FormErrorMessage>}
