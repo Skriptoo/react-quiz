@@ -1,28 +1,24 @@
-import { ChakraProvider } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LobbyPage from "../pages/LobbyPage";
-import SocketProvider from "./SocketProvider";
-import HomePage from "../pages/HomePage";
+import LobbyPage from "../pages/Lobby/LobbyPage";
+import HomePage from "../pages/Home/HomePage";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage/>,
     errorElement: <></>
   },
   {
-    path: "/room/:roomCode",
-    element: <SocketProvider><LobbyPage/></SocketProvider>,
+    path: "/room",
+    element: <LobbyPage/>,
     errorElement: <></>
   }  
 ]);
 
 const AppProviders = () => {
   return (
-    <ChakraProvider>
-      <RouterProvider router={router}/>
-    </ChakraProvider>
+    <RouterProvider router={router}/>
   )
 }
 

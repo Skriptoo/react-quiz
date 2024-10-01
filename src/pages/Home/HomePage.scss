@@ -1,0 +1,24 @@
+.main {
+  height: 100vh;
+  width: 100vw;
+  display: flex; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .wrapper {
+    height: 50%;
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    justify-content: space-around;
+  }
+  .formBox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+}
